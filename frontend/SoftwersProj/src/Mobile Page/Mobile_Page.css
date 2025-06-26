@@ -1,0 +1,20 @@
+.mobile-page-header{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 90px;
+    flex-direction: column;
+}
+.NbrTxt{
+    width: 30%;
+}
+.mobile-page-table{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Table{
+    width: 85%;
+}
