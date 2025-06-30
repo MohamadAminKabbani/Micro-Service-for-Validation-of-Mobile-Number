@@ -2,6 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const MobileSystem = require('./database'); // Import mongoose model
+const mongoose = require('mongoose');
 
 const app = express();
 app.use(express.json());
@@ -107,8 +108,25 @@ app.get('/getallusers', async (req, res) => {
   }
 });
 
+app.post('/validate-mobile', async (req, res) => {
+  try {
+    // ... your logic, e.g., call to third-party API ...
+    // Always send a response!
+    return res.json({ countryCode: 'US', countryName: 'United States', operatorName: 'AT&T' });
+  } catch (err) {
+    return res.status(400).json({ error: 'Invalid number' });
+  }
+});
 
-// ✅ Start the server
-app.listen(3000, () => {
-  console.log('🚀 Server is running on port 3000');
+if (require.main === module) {
+  // Only listen if this file is run directly, not when required by tests
+  app.listen(3000, () => {
+    console.log('🚀 Server is running on port 3000');
+  });
+}
+
+module.exports = app; // <-- Export the app, not the server
+
+afterAll(async () => {
+  await mongoose.connection.close();
 });
